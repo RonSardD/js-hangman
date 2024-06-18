@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="game-container">
+    <div id="home-page" class="page">
+        <h1>Welcome to the Hangman</h1>
+        <p>Essayez de deviner le mot en sélectionnant des lettres. Vous avez 6 tentatives pour réussir.</p>
+        <button id="start-button">Commencer le jeu</button>
+    </div>
+    <div id="game-page" class="page" style="display: none;">
         <h1>Hangman</h1>
         <div id="word-container"></div>
         <div id="letters-container"></div>
         <div id="status-container">
-            <p id="attemps-remaining">Tentatives restantes : <span id="attempts"></span></p>
+            <p id="attempts-remaining">Tentatives restantes : <span id="attempts"></span></p>
             <p id="message"></p>
         </div>
-        <button id="restart-button">Recommancer</button>
+        <button id="restart-button">Recommencer</button>
     </div>
     <script src="script.js"></script>
 </body>

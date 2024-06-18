@@ -4,15 +4,28 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #007bff;
+    margin: 0;
 }
 
-.game-container {
+.page {
     text-align: center;
-    background-color: #fff;
+    background-color: #1023f2;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgb(241, 237, 237);
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#home-page p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 
 #word-container {
@@ -21,11 +34,19 @@ body {
     margin-bottom: 20px;
 }
 
+#letters-container {
+    margin-bottom: 20px;
+}
+
 #letters-container button {
     margin: 5px;
     padding: 10px;
     font-size: 1em;
     cursor: pointer;
+    background-color: white;
+    color: #007bff;
+    border: none;
+    border-radius: 5px;
 }
 
 #letters-container button:disabled {
@@ -37,9 +58,13 @@ body {
     margin-top: 20px;
 }
 
-#restart-button {
+#restart-button, #start-button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }

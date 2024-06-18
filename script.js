@@ -1,15 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const words = ['cody', 'fabian', 'christian', 'michel', 'nathan'];
+    const words = ['chris', 'paul', 'damien', 'valentin', 'zaventem'];
     let chosenWord = words[Math.floor(Math.random() * words.length)];
     let attempts = 6;
     let guessedLetters = [];
     let correctGuesses = new Set(chosenWord.split(''));
-
+    
     const wordContainer = document.getElementById('word-container');
     const lettersContainer = document.getElementById('letters-container');
     const attemptsElement = document.getElementById('attempts');
     const messageElement = document.getElementById('message');
     const restartButton = document.getElementById('restart-button');
+    const startButton = document.getElementById('start-button');
+    const homePage = document.getElementById('home-page');
+    const gamePage = document.getElementById('game-page');
+
+    async function fetchWord() {
+        const response = await fetch('/word');
+        const data = await response.json();
+        chosenWord = data.word;
+        correctGuesses = new Set(chosenWord.split(''));
+        console.log('Initial correctGuesses:', correctGuesses); // Debugging line
+        updateWordDisplay();
+        updateAttemptsDisplay();
+        createLetterButtons();
+    }
 
     function updateWordDisplay() {
         wordContainer.innerHTML = chosenWord.split('').map(letter => guessedLetters.includes(letter) ? letter : '_').join(' ');
@@ -20,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkGameStatus() {
+        console.log('Attempts:', attempts);
+        console.log('Correct guesses left:', correctGuesses.size);
         if (attempts === 0) {
             messageElement.textContent = 'Vous avez perdu !';
             lettersContainer.querySelectorAll('button').forEach(button => button.disabled = true);
@@ -39,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 guessedLetters.push(letter);
                 if (chosenWord.includes(letter)) {
                     correctGuesses.delete(letter);
+                    console.log('Updated correctGuesses:', correctGuesses);
                     updateWordDisplay();
                 } else {
                     attempts--;
@@ -61,11 +78,19 @@ document.addEventListener('DOMContentLoaded', () => {
         updateWordDisplay();
         updateAttemptsDisplay();
         createLetterButtons();
+        fetchWord();
     }
+
+    startButton.addEventListener('click', () => {
+        homePage.style.display = 'none';
+        gamePage.style.display = 'block';
+        fetchWord();
+    });
 
     restartButton.addEventListener('click', restartGame);
 
     updateWordDisplay();
     updateAttemptsDisplay();
     createLetterButtons();
+    fetchWord();
 });
